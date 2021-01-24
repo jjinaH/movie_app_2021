@@ -1,24 +1,19 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class App extends React.Component {
   state = {
-    count: 0,
+    //state를 사용할 때 모든 것을 미리 default를 설정해두지 않아도 됨!
+    isLoading: true,
+    movies: [],
   };
-  add = () => {
-    this.setState((current) => ({ count: current.count + 1 }));
-  };
-  minus = () => {
-    this.setState((current) => ({ count: current.count - 1 }));
-  };
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: false });
+    }, 6000);
+  }
   render() {
-    return (
-      <div>
-        <h1>The number is: {this.state.count}</h1>
-        <button onClick={this.add}>Add</button>
-        <button onClick={this.minus}>Minus</button>
-      </div>
-    );
+    const { isLoading } = this.state;
+    return <div>{isLoading ? 'Loading...' : 'We are ready'}</div>;
   }
 }
 
